@@ -6,10 +6,13 @@ while True:
     try:
         column_num = int(input("Columns: "))
         row_num = int(input("Rows: "))
+        break
     except:
         print("You can't create a grid without whole numbers")
         time.sleep(2)
         os.system("cls")
+
+while True:
     if column_num <= 0 or row_num <= 0:
         print ("You have to have at least 1 column and 1 row")
         time.sleep(2)
