@@ -20,6 +20,9 @@ while True:
     else:
         break
 
+print("Creating Grid...")
+time.sleep(1)
+
 column_list = [f"{Fore.RESET}O"]*column_num # creates a list with how many columns a row has
 grid = []
 for i in range(row_num):
@@ -103,10 +106,25 @@ def downleft_check():
 draw()
 
 player = 1
+won = False
 
-while True:
-    print(f"{Fore.RESET}It is player {player}'s go.")
-    c_choice = int(input("Enter the column number: ")) - 1
+while won == False:
+    
+    while True:
+        os.system("cls")
+        print(f"{Fore.RESET}It is player {player}'s go.")
+        draw()
+        try:
+            c_choice = int(input("Enter the column number: ")) - 1
+            if c_choice < 0 or c_choice > column_num:
+                print("Please input a column number that exists")
+                time.sleep(2)
+            else:
+                break
+        except:
+            print("Put in a NUMBER of a column listed")
+            time.sleep(2)
+
     
     add_piece() # calls the add_piece function
     
@@ -133,9 +151,6 @@ while True:
     win_type = downleft_check()[1]
     if won == True:
         break
-
-    os.system("cls")
-    draw()
     
     if won == False:
         if player == 1:
@@ -145,7 +160,7 @@ while True:
 
 os.system("cls")
 draw()
-{Fore.RESET}
+Fore.RESET
 
 if win_type == "h":
     print(f"{Fore.RESET}Player {player} has won with a horizontal line!")
