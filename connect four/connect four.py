@@ -6,22 +6,19 @@ while True:
     try:
         column_num = int(input("Columns: "))
         row_num = int(input("Rows: "))
-        break
     except:
-        print("You can't create a grid without whole numbers")
+        print("You can't create a grid without numbers")
         time.sleep(2)
         os.system("cls")
-
-while True:
-    if column_num <= 0 or row_num <= 0:
-        print ("You have to have at least 1 column and 1 row")
-        time.sleep(2)
-        os.system("cls")
-    else:
+    try:
+        if column_num <= 0 or row_num <= 0:
+            print ("You have to have at least 1 column and 1 row")
+            time.sleep(2)
+            os.system("cls")
+        else:
+            break
+    except:
         break
-
-print("Creating Grid...")
-time.sleep(1)
 
 column_list = [f"{Fore.RESET}O"]*column_num # creates a list with how many columns a row has
 grid = []
@@ -103,28 +100,26 @@ def downleft_check():
     return False, ""
 
 # main program
-draw()
-
 player = 1
-won = False
 
-while won == False:
-    
+while True:
+    print(f"{Fore.RESET}It is player {player}'s go.")
     while True:
-        os.system("cls")
-        print(f"{Fore.RESET}It is player {player}'s go.")
         draw()
+        valid_c_choice = False
         try:
             c_choice = int(input("Enter the column number: ")) - 1
-            if c_choice < 0 or c_choice > column_num:
-                print("Please input a column number that exists")
+            valid_c_choice = True
+            if c_choice < 0 or c_choice >= column_num:
+                print("Please enter a column number that is listed")
                 time.sleep(2)
+                os.system("cls")
             else:
                 break
         except:
-            print("Put in a NUMBER of a column listed")
+            print("Please enter a number")
             time.sleep(2)
-
+            os.system("cls")
     
     add_piece() # calls the add_piece function
     
@@ -151,6 +146,8 @@ while won == False:
     win_type = downleft_check()[1]
     if won == True:
         break
+
+    os.system("cls")
     
     if won == False:
         if player == 1:
@@ -160,7 +157,6 @@ while won == False:
 
 os.system("cls")
 draw()
-Fore.RESET
 
 if win_type == "h":
     print(f"{Fore.RESET}Player {player} has won with a horizontal line!")
